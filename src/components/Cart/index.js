@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const Cart = ({ state, dispatch }) => {
   const { cart } = state;
@@ -14,6 +14,16 @@ const Cart = ({ state, dispatch }) => {
       },
     });
   };
+
+  useEffect(() => {
+    setTotal(
+      cart.reduce(
+        (acc, currentValue) =>
+          acc + Number(currentValue.price) * currentValue.quantity,
+        0
+      )
+    );
+  }, [cart]);
 
   return (
     <div
