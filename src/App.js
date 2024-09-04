@@ -24,7 +24,7 @@ function App() {
   }, []);
 
   return (
-    <div>
+    <div style={{ display: "flex" }}>
       <Products state={state} dispatch={dispatch} />
       <Cart state={state} dispatch={dispatch} />
     </div>
