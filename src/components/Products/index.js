@@ -35,29 +35,51 @@ const Products = ({ state, dispatch }) => {
             <b>$ {productItem.price}</b>
           </div>
 
-          <button
-            style={{
-              padding: 5,
-              border: 0,
-              borderRadius: 5,
-              backgroundColor: "green",
-              color: "white",
-            }}
-          >
-            Add to Cart
-          </button>
-
-          <button
-            style={{
-              padding: 5,
-              border: 0,
-              borderRadius: 5,
-              backgroundColor: "red",
-              color: "white",
-            }}
-          >
-            Remove from Cart
-          </button>
+          {cart.some((product) => product.id === productItem.id) ? (
+            <button
+              style={{
+                padding: 5,
+                border: 0,
+                borderRadius: 5,
+                backgroundColor: "red",
+                color: "white",
+              }}
+              onClick={() => {
+                dispatch({
+                  type: "REMOVE_FROM_CART",
+                  payload: {
+                    id: productItem.id,
+                  },
+                });
+              }}
+            >
+              Remove from Cart
+            </button>
+          ) : (
+            <button
+              style={{
+                padding: 5,
+                border: 0,
+                borderRadius: 5,
+                backgroundColor: "green",
+                color: "white",
+              }}
+              onClick={() =>
+                dispatch({
+                  type: "ADD_TO_CART",
+                  payload: {
+                    id: productItem.id,
+                    title: productItem.title,
+                    thumbnail: productItem.thumbnail,
+                    quantity: 1,
+                    price: productItem.price,
+                  },
+                })
+              }
+            >
+              Add to Cart
+            </button>
+          )}
         </div>
       ))}
     </div>
